@@ -311,3 +311,21 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
 /* Selo do Mercado Pago: só na tela de pagamento, depois do aceite do contrato */
 .selo-mp { display: flex; align-items: center; gap: 14px; margin: 22px 0 0; padding: 14px 18px; border: 1px solid var(--line); border-radius: 12px; font-size: .9rem; color: var(--ink-3); max-width: 420px; }
 .selo-mp img { height: 28px; width: auto; flex: none; }
+
+/* Bloco "Próximo passo" do resultado: única área tingida da tela, um só botão; ações secundárias fora, como links */
+.next { margin-top: 48px; padding: 34px 36px; border: 1px solid #d9e2ea; border-top: 4px solid var(--brand); border-radius: var(--radius); background: var(--brand-soft); }
+.next .eyebrow { margin: 0 0 8px; }
+.next h3 { font-size: clamp(1.45rem, 3vw, 1.8rem); margin: 0 0 12px; }
+.next p { color: var(--ink-2); max-width: 62ch; }
+.next-steps { list-style: none; counter-reset: ns; margin: 22px 0 28px; padding: 0; display: grid; gap: 12px; }
+.next-steps li { counter-increment: ns; position: relative; padding-left: 42px; min-height: 28px; display: flex; align-items: center; color: var(--ink); }
+.next-steps li::before { content: counter(ns); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid var(--brand); color: var(--brand); display: grid; place-items: center; font: 600 .85rem var(--sans); }
+.btn.big { min-height: 58px; min-width: 300px; padding: 17px 36px; font-size: 1.1rem; font-weight: 600; }
+.next .assure { margin: 16px 0 0; font-size: .88rem; color: var(--ink-3); }
+.next-sec { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.next-sec .btn.link { min-height: 44px; padding: 8px 4px; font-size: .94rem; }
+@media (max-width: 640px) {
+  .next { padding: 24px 20px; }
+  .btn.big { width: 100%; min-width: 0; }
+}
+@media print { .next-sec { display: none !important; } }
