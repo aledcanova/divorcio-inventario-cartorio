@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estimativa de ITCMD por estado (herança e doação)</title>
+<meta name="description" content="Ferramenta informativa que estima o imposto estadual sobre herança e doação (ITCMD) conforme as alíquotas de cada estado. Funciona só no navegador.">
+<link rel="canonical" href="https://aledcanova.github.io/divorcio-inventario-cartorio/itcmd.html">
+<meta property="og:title" content="Estimativa de ITCMD por estado (herança e doação)">
+<meta property="og:description" content="Ferramenta informativa que estima o imposto estadual sobre herança e doação (ITCMD) conforme as alíquotas de cada estado. Funciona só no navegador.">
+<meta property="og:locale" content="pt_BR">
+<meta name="theme-color" content="#ffffff">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f2a43'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23fff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Divórcio e Inventário em Cartório, página inicial">
+      <span class="brand-mark" aria-hidden="true">D</span>
+      <span><strong>Divórcio e Inventário em Cartório</strong><small>Escritura · Partilha · Registro</small></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="procedimento.html">Sobre o procedimento</a>
+      <a href="como-funciona.html">Como funciona</a>
+      <a href="perguntas.html">Perguntas frequentes</a>
+      <a href="itcmd.html" aria-current="page">Calculadora ITCMD</a>
+      <a href="quem-somos.html">Quem somos</a>
+      <a href="contato.html">Contato</a>
+      <a class="cta" href="diagnostico.html">Iniciar diagnóstico</a>
+    </nav>
+  </div>
+</header>
+<main id="conteudo">
+
+<section class="page-head">
+  <div class="wrap prose">
+    <p class="eyebrow">Ferramenta informativa</p>
+    <h1>Estimativa de ITCMD</h1>
+    <p class="lead">O ITCMD é o imposto estadual sobre herança e doação. Cada estado tem alíquotas, faixas e isenções próprias. Esta ferramenta dá uma ordem de grandeza do imposto.</p>
+    <div class="note"><p><strong>É uma estimativa, não um cálculo oficial.</strong> O valor devido é apurado pela Secretaria da Fazenda, que pode avaliar os bens por valor diferente do declarado. Vale a lei em vigor na data do falecimento ou da doação. Nada do que você digitar sai do seu navegador.</p></div>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap prose">
+    <form class="form itcmd" id="f-itcmd" novalidate>
+      <fieldset class="box">
+        <legend>Dados</legend>
+        <div class="row2">
+          <div class="field">
+            <label for="uf">Estado</label>
+            <select id="uf" name="uf" required></select>
+            <p class="hint">Imóveis: estado onde ficam. Demais bens: último domicílio de quem faleceu ou domicílio do doador.</p>
+          </div>
+          <div class="field">
+            <span class="label" id="l-tipo">Tipo de transmissão</span>
+            <div class="choice" role="radiogroup" aria-labelledby="l-tipo">
+              <label><input type="radio" name="tipo" value="cm" checked> Herança</label>
+              <label><input type="radio" name="tipo" value="doacao"> Doação ou excesso de meação</label>
+            </div>
+          </div>
+        </div>
+        <div class="row2 mt">
+          <div class="field">
+            <label for="valor">Valor dos bens transmitidos (R$)</label>
+            <input type="text" id="valor" name="valor" inputmode="decimal" autocomplete="off" placeholder="ex.: 500.000,00">
+            <p class="hint">Na herança, não inclua a meação do cônjuge sobrevivente: ela não é herança.</p>
+          </div>
+          <div class="field">
+            <label for="n">Número de herdeiros ou donatários</label>
+            <input type="number" id="n" name="n" min="1" max="50" value="1" inputmode="numeric">
+            <p class="hint">A estimativa supõe divisão em partes iguais.</p>
+          </div>
+        </div>
+      </fieldset>
+      <div class="btns no-print"><button class="btn" type="submit">Estimar</button></div>
+    </form>
+    <div id="r-itcmd" class="result" hidden aria-live="polite"></div>
+
+    <h2>O que a estimativa não considera</h2>
+    <ul>
+      <li>isenções que dependem de condições pessoais (imóvel único de moradia, pequeno valor, agricultor familiar e outras);</li>
+      <li>avaliação fiscal diferente do valor informado;</li>
+      <li>multa e juros por atraso;</li>
+      <li>descontos por pagamento antecipado, onde existem;</li>
+      <li>partilha em partes desiguais, renúncia ou cessão entre herdeiros;</li>
+      <li>bens situados em estados diferentes, que são tributados separadamente.</li>
+    </ul>
+    <p class="muted">Dados conferidos em 2026-10-07. Além do ITCMD, o inventário e o divórcio têm emolumentos de cartório, fixados em tabela de cada estado, e custos de certidões e registros.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <p><strong>Divórcio e Inventário em Cartório</strong></p>
+        <p>Divórcio consensual, dissolução de união estável e inventário por escritura pública em tabelionato de notas, com assinatura presencial ou por videoconferência. Atendimento por advogado inscrito na OAB.</p>
+      </div>
+      <div>
+        <p><strong>Conteúdo</strong></p>
+        <ul>
+          <li><a href="procedimento.html">Sobre o procedimento</a></li>
+          <li><a href="quem-somos.html">Quem somos</a></li>
+          <li><a href="como-funciona.html">Como funciona</a></li>
+          <li><a href="itcmd.html">Estimativa de ITCMD</a></li>
+          <li><a href="perguntas.html">Perguntas frequentes</a></li>
+          <li><a href="diagnostico.html">Diagnóstico</a></li>
+        </ul>
+      </div>
+      <div>
+        <p><strong>Informações legais</strong></p>
+        <ul>
+          <li><a href="privacidade.html">Política de privacidade</a></li>
+          <li><a href="termos.html">Termos de uso</a></li>
+          <li><a href="acessibilidade.html">Acessibilidade</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal-line">Responsável técnico: Alexandre Dickel Canova, advogado, OAB/RS 127.163, Porto Alegre/RS. Conteúdo de caráter exclusivamente informativo, nos termos do Provimento nº 205/2021 do Conselho Federal da OAB. Não constitui consulta jurídica nem promessa de resultado. Este site não usa cookies nem rastreadores. Atualizado em 2026-10-07.</p>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
+<script src="assets/js/itcmd-data.js" defer></script>
+<script src="assets/js/itcmd.js" defer></script>
+</body>
+</html>
