@@ -340,3 +340,59 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
 .timeline > li::before { content: "0" counter(t); position: absolute; left: 0; top: 18px; font-family: var(--serif); font-size: 1rem; color: var(--ink-3); }
 .timeline strong { color: var(--ink); font-family: var(--serif); font-weight: 500; font-size: 1.08rem; }
 .mapa .timeline { margin-top: 14px; }
+
+/* ===== Identidade (07/10/2026): cabeçalho, marca, rodapé e topo da página inicial ===== */
+.wrap, .site-header .wrap { max-width: 1160px; }
+.site-header { background: #fff; backdrop-filter: none; }
+.site-header .wrap { min-height: 76px; gap: 32px; }
+.brand { gap: 14px; flex: none; }
+.brand-mark { width: 40px; height: 40px; border-radius: 0; background: none; display: block; }
+.brand-text { display: grid; gap: 3px; padding-left: 14px; border-left: 1px solid var(--line); }
+.brand strong { font-size: 1.14rem; letter-spacing: 0; line-height: 1.1; }
+.brand small { font-size: .68rem; letter-spacing: .22em; line-height: 1; }
+.nav { gap: 2px; }
+.nav a { position: relative; padding: 10px 11px; font-size: .9rem; color: var(--ink-2); }
+.nav a:not(.cta)::after { content: ""; position: absolute; left: 11px; right: 11px; bottom: 4px; height: 1px; background: var(--brand); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease); }
+.nav a:not(.cta):hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.nav a.cta { margin-left: 14px; padding: 11px 22px; }
+@media (max-width: 1180px) {
+  .nav-toggle { display: inline-block; }
+  .nav { display: none; position: absolute; left: 0; right: 0; top: 76px; background: #fff; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 8px 24px 20px; }
+  .nav.open { display: flex; }
+  .nav a { padding: 13px 4px; border-bottom: 1px solid var(--line); border-radius: 0; }
+  .nav a:not(.cta)::after { display: none; }
+  .nav a.cta { margin: 14px 0 0; text-align: center; border-bottom: 0; border-radius: 999px; }
+}
+@media (min-width: 1181px) { .nav-toggle { display: none; } .nav { display: flex; position: static; flex-direction: row; padding: 0; border: 0; } }
+@media (max-width: 560px) {
+  .site-header .wrap { min-height: 68px; }
+  .nav { top: 68px; }
+  .brand-mark { width: 36px; height: 36px; }
+  .brand strong { white-space: nowrap; font-size: 1.02rem; }
+  .brand small { display: block; }
+  .brand-text { padding-left: 12px; }
+}
+
+/* Topo da página inicial: texto à esquerda, ficha do procedimento à direita */
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 72px; align-items: end; }
+.hero-ficha { border-top: 1px solid var(--ink); padding-top: 22px; }
+.hero-ficha .eyebrow { margin: 0 0 6px; }
+.hero-ficha dl { margin: 0; }
+.hero-ficha dl > div { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.hero-ficha dt { font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; color: var(--ink-3); margin-bottom: 4px; }
+.hero-ficha dd { margin: 0; font-family: var(--serif); font-size: 1.02rem; line-height: 1.4; color: var(--ink); }
+@media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+/* Rodapé escuro, com a marca */
+.site-footer { background: var(--brand); border-top: 0; color: rgba(255,255,255,.74); padding: 64px 0 36px; }
+.site-footer a { color: rgba(255,255,255,.74); text-decoration-color: rgba(255,255,255,.3); }
+.site-footer a:hover { color: #fff; }
+.site-footer strong { color: #fff; }
+.site-footer .cols { gap: 48px; grid-template-columns: 1.6fr 1fr 1fr; }
+.foot-brand { margin: 0 0 18px; color: #fff; }
+.foot-brand .brand-text { border-left-color: rgba(255,255,255,.25); }
+.foot-brand small { color: rgba(255,255,255,.7); }
+.foot-brand .brand-mark { border: 1px solid rgba(255,255,255,.3); border-radius: 9px; }
+.site-footer .cols > div > p:first-child:not(.foot-brand) strong { font-size: .72rem; text-transform: uppercase; letter-spacing: .16em; font-weight: 500; color: rgba(255,255,255,.6); }
+.legal-line { margin-top: 44px; border-top-color: rgba(255,255,255,.16); color: rgba(255,255,255,.6); }
+@media (max-width: 760px) { .site-footer .cols { grid-template-columns: 1fr; gap: 32px; } }
