@@ -511,10 +511,21 @@
     $('pag-valor').textContent = brl(p.agora);
     var temPix = !!(CFG.pix_chave && CFG.pix_nome), temCartao = !!p.link;
     if (temPix) $('pix-code').value = pixCode(p.agora, caso.protocolo.replace(/[^A-Za-z0-9]/g, '').slice(0, 25));
+    // Mercado Pago: o servidor do escritório cria o link com o valor do contrato; o navegador não define preço
+    var usaMP = !!CFG.mercado_pago && !!CFG.endpoint && produto === 'consulta';
+    $('pag-mp').hidden = true; $('pag-mp-espera').hidden = !usaMP;
+    if (usaMP) {
+      temPix = false;
+      fetch(CFG.endpoint, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ 'form-name': 'pagamento', protocolo: caso.protocolo, email: caso.email }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { if (!j.ok || !/^https:\/\/([a-z0-9-]+\.)*mercadopago\.com(\.br)?\//.test(j.url)) throw new Error('mp'); $('mp-link').href = j.url; $('pag-mp').hidden = false; })
+        .catch(function () { var pix = !!(CFG.pix_chave && CFG.pix_nome); $('pag-pix').hidden = !pix; $('pag-email').hidden = pix; })
+        .then(function () { $('pag-mp-espera').hidden = true; });
+    }
     $('pag-pix').hidden = !temPix;
     if (temCartao) $('cartao-link').href = p.link;
     $('pag-cartao').hidden = !temCartao;
-    $('pag-email').hidden = temPix || temCartao;
+    $('pag-email').hidden = temPix || temCartao || usaMP;
     var passos = produto === 'consulta'
       ? [['Confirmação', 'Você recebe por e-mail a cópia do contrato e, identificado o pagamento, a confirmação.'],
          ['Análise', 'O advogado examina as suas respostas e os documentos. Se faltar algo essencial, ele avisa.'],

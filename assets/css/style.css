@@ -303,3 +303,8 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
   .nav a { padding: 13px 4px; border-bottom: 1px solid var(--line); border-radius: 0; }
   .nav a.cta { margin: 14px 0 0; text-align: center; border-bottom: 0; border-radius: 999px; }
 }
+
+/* Selo de pagamento */
+.paybadge { display: flex; align-items: center; gap: 10px; color: var(--ink-3); font-size: .88rem; margin-top: 18px; }
+.paybadge svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.site-footer .paybadge { margin-top: 20px; }
