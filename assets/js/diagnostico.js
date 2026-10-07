@@ -261,7 +261,9 @@
     var m = $('mapa'); m.textContent = '';
     if (result.atencao.length) { m.appendChild(el('h3', 'Pontos de atenção')); m.appendChild(list(result.atencao)); }
     m.appendChild(el('h3', 'Documentos normalmente relevantes')); m.appendChild(list(result.docs));
-    m.appendChild(el('h3', 'Etapas gerais')); m.appendChild(list(result.etapas, true));
+    var tl = el('ol', null, 'timeline');
+    result.etapas.forEach(function (t) { var li = el('li'); li.appendChild(el('strong', t)); tl.appendChild(li); });
+    m.appendChild(el('h3', result.pill === 'bad' ? 'Etapas gerais' : 'Como é o caminho até a escritura')); m.appendChild(tl);
     $('campo-valor').hidden = !COM_VALOR[result.cod];
     $('l-valor').textContent = inv(a) ? 'Valor aproximado da herança (R$)' : 'Valor aproximado dos bens a partilhar (R$)';
     swap(pResult, $('verdict-title'));
@@ -270,7 +272,7 @@
   $('refazer').addEventListener('click', function () { a = {}; result = null; renderQuestion(ORDER[0]); swap(stage, null); });
   function num(v) { v = String(v).trim().replace(/[R$\s]/g, ''); if (v.indexOf(',') >= 0) v = v.replace(/\./g, '').replace(',', '.'); else if (/^\d{1,3}(\.\d{3})+$/.test(v)) v = v.replace(/\./g, ''); return parseFloat(v); }
   $('imprimir').addEventListener('click', function () { window.print(); });
-  $('abrir-envio').addEventListener('click', function () { swap(pEnvio, $('envio-title')); });
+  ['abrir-envio', 'abrir-envio-2'].forEach(function (id) { $(id).addEventListener('click', function () { swap(pEnvio, $('envio-title')); }); });
   $('voltar-resultado').addEventListener('click', function () { swap(pResult, $('verdict-title')); });
 
   // ---------- Passo 1: dados e documentos ----------
@@ -381,6 +383,7 @@
       } else {
         $('nota-so-consulta').textContent = 'O atendimento começa pela consulta de viabilidade: o advogado analisa os documentos, assina a orientação e envia a proposta para a condução do caso.';
       }
+      humano();
       swap(pProposta, $('proposta-title'));
     });
   });
@@ -433,6 +436,15 @@
     });
   });
   $('voltar-proposta').addEventListener('click', function () { swap(pProposta, $('proposta-title')); });
+  function humano() {
+    var txt = encodeURIComponent('Protocolo ' + caso.protocolo + ' - quero falar com o advogado');
+    var zap = CFG.whatsapp_e164 ? 'https://wa.me/' + CFG.whatsapp_e164.replace(/\D/g, '') + '?text=' + txt : '';
+    Array.prototype.forEach.call(document.querySelectorAll('.humano-link'), function (l) {
+      l.href = zap || 'mailto:' + CFG.email + '?subject=' + txt;
+      l.textContent = zap ? 'Atendimento humano por WhatsApp' : 'Atendimento humano por e-mail';
+      if (zap) { l.target = '_blank'; l.rel = 'noopener'; }
+    });
+  }
   $('abrir-falar').addEventListener('click', function () {
     var assunto = encodeURIComponent('Protocolo ' + caso.protocolo + ' - falar com o advogado');
     $('falar-email').href = 'mailto:' + CFG.email + '?subject=' + assunto;
@@ -561,6 +573,7 @@
     $('offer-completo').hidden = false; $('offer-consulta').hidden = true; $('nota-so-consulta').hidden = true;
     $('proposta-intro').textContent = 'Proposta do serviço completo para o protocolo ' + h.retomar + ', com o valor da consulta abatido.';
     $('k-retomada').hidden = false;
+    humano();
     swap(pProposta, $('proposta-title'));
     return true;
   }

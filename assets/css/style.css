@@ -179,9 +179,6 @@ details p { color: var(--ink-3); margin: 0 0 24px; max-width: 62ch; }
 .mapa h3 { margin-top: 2em; }
 .mapa ul, .mapa ol { padding-left: 20px; color: var(--ink-2); }
 .mapa li { margin: 8px 0; }
-.next { margin-top: 40px; padding: 30px; border: 1px solid var(--ink); border-radius: var(--radius); }
-.next h3 { margin-top: 0; font-size: 1.4rem; }
-.next p { color: var(--ink-3); }
 
 /* Formulário */
 .form { display: grid; gap: 20px; margin-top: 8px; }
@@ -312,20 +309,34 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
 .selo-mp { display: flex; align-items: center; gap: 14px; margin: 22px 0 0; padding: 14px 18px; border: 1px solid var(--line); border-radius: 12px; font-size: .9rem; color: var(--ink-3); max-width: 420px; }
 .selo-mp img { height: 28px; width: auto; flex: none; }
 
-/* Bloco "Próximo passo" do resultado: única área tingida da tela, um só botão; ações secundárias fora, como links */
-.next { margin-top: 48px; padding: 34px 36px; border: 1px solid #d9e2ea; border-top: 4px solid var(--brand); border-radius: var(--radius); background: var(--brand-soft); }
-.next .eyebrow { margin: 0 0 8px; }
-.next h3 { font-size: clamp(1.45rem, 3vw, 1.8rem); margin: 0 0 12px; }
-.next p { color: var(--ink-2); max-width: 62ch; }
-.next-steps { list-style: none; counter-reset: ns; margin: 22px 0 28px; padding: 0; display: grid; gap: 12px; }
-.next-steps li { counter-increment: ns; position: relative; padding-left: 42px; min-height: 28px; display: flex; align-items: center; color: var(--ink); }
-.next-steps li::before { content: counter(ns); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid var(--brand); color: var(--brand); display: grid; place-items: center; font: 600 .85rem var(--sans); }
-.btn.big { min-height: 58px; min-width: 300px; padding: 17px 36px; font-size: 1.1rem; font-weight: 600; }
-.next .assure { margin: 16px 0 0; font-size: .88rem; color: var(--ink-3); }
-.next-sec { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
-.next-sec .btn.link { min-height: 44px; padding: 8px 4px; font-size: .94rem; }
-@media (max-width: 640px) {
-  .next { padding: 24px 20px; }
-  .btn.big { width: 100%; min-width: 0; }
-}
-@media print { .next-sec { display: none !important; } }
+/* Bloco "Próximo passo", fecho do resultado e atendimento humano: espelham o funil do site de regularização de imóveis */
+.next { margin-top: 28px; padding: 38px 36px; border: 0; border-radius: var(--radius); background: var(--brand); box-shadow: var(--shadow); }
+.next .eyebrow { color: rgba(255,255,255,.7); margin: 0 0 10px; }
+.next h3 { margin: 0 0 12px; color: #fff; font-size: clamp(1.5rem, 3.2vw, 1.95rem); line-height: 1.2; }
+.next p { color: rgba(255,255,255,.84); margin: 0; max-width: 60ch; }
+.next .checks { list-style: none; margin: 22px 0 28px; padding: 0; display: grid; gap: 10px; color: #fff; }
+.next .checks li { position: relative; margin: 0; padding-left: 30px; }
+.next .checks li::before { content: "✓"; position: absolute; left: 0; top: 1px; width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,.16); color: #fff; font-size: .78rem; line-height: 20px; text-align: center; }
+.btn.cta { min-height: 60px; padding: 18px 36px; background: #fff; border-color: #fff; color: var(--brand); font-weight: 600; font-size: 1.08rem; }
+.btn.cta:hover { color: var(--brand); box-shadow: 0 12px 28px -10px rgba(0,0,0,.45); }
+.next .micro { margin-top: 14px; font-size: .92rem; color: rgba(255,255,255,.72); }
+.next .trilha { list-style: none; counter-reset: t; display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 26px 0 0; padding: 20px 0 0; border-top: 1px solid rgba(255,255,255,.18); font-size: .9rem; color: rgba(255,255,255,.78); }
+.next .trilha li { counter-increment: t; margin: 0; display: flex; align-items: center; gap: 8px; }
+.next .trilha li::before { content: counter(t); width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45); font-size: .78rem; line-height: 20px; text-align: center; }
+.fecho { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+.fecho .acoes { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.fecho .btn.link { min-height: 0; padding: 6px 0; font-size: .92rem; }
+.humano { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line); }
+.humano p { margin: 0; color: var(--ink-3); }
+.humano p strong { color: var(--ink); font-weight: 500; }
+.humano .btns { margin-top: 18px; }
+@media (max-width: 600px) { .next { padding: 28px 22px; } .btn.cta { width: 100%; padding: 16px 20px; } .fecho .btn:not(.link) { width: 100%; } }
+@media print { .fecho { display: none !important; } }
+
+/* Etapas do resultado em linha do tempo numerada, como no site de regularização */
+.timeline { counter-reset: t; list-style: none; padding: 0 !important; margin: 0; }
+.timeline > li { counter-increment: t; position: relative; display: grid; gap: 2px; padding: 18px 0 18px 60px; margin: 0 !important; border-top: 1px solid var(--line); color: var(--ink-3); }
+.timeline > li:first-child { border-top-color: var(--ink); }
+.timeline > li::before { content: "0" counter(t); position: absolute; left: 0; top: 18px; font-family: var(--serif); font-size: 1rem; color: var(--ink-3); }
+.timeline strong { color: var(--ink); font-family: var(--serif); font-weight: 500; font-size: 1.08rem; }
+.mapa .timeline { margin-top: 14px; }

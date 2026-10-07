@@ -56,25 +56,31 @@
         <h2 id="verdict-title" tabindex="-1"></h2>
         <p id="verdict-text"></p>
       </div>
+      <div class="next no-print" id="next">
+        <p class="eyebrow">Próximo passo</p>
+        <h3>Tenha a resposta por escrito, assinada por advogado.</h3>
+        <p>O resultado acima considera apenas as suas respostas. Na consulta, o advogado examina as certidões e os documentos dos bens e diz, por escrito, se o caso pode ser resolvido em cartório e como seguir.</p>
+        <ul class="checks">
+          <li>Orientação definitiva assinada pelo responsável técnico, em até 24 horas</li>
+          <li>Proposta detalhada do procedimento: etapas, documentos e valores</li>
+          <li>Tudo online, com protocolo e cópia do contrato no seu e-mail</li>
+        </ul>
+        <button class="btn cta" type="button" id="abrir-envio">Enviar documentos e ver a proposta <span aria-hidden="true">→</span></button>
+        <p class="micro">Leva cerca de dois minutos. Você conhece o valor e lê o contrato antes de decidir.</p>
+        <ol class="trilha" aria-label="Etapas da contratação">
+          <li>Dados e documentos</li>
+          <li>Proposta e contrato</li>
+          <li>Pagamento</li>
+        </ol>
+      </div>
+
       <div id="mapa"></div>
       <p class="muted">Classificação informativa, feita somente com as suas respostas. Não é consulta jurídica nem promessa de resultado. A confirmação depende da análise dos documentos por advogado.</p>
 
-      <div class="next no-print" id="next">
-        <p class="eyebrow">Próximo passo</p>
-        <h3>A análise do seu caso por um advogado</h3>
-        <p>O resultado acima é uma triagem automática. A confirmação vem com a consulta de viabilidade, que é um serviço pago: o valor e o contrato aparecem na etapa seguinte, antes de qualquer contratação.</p>
-        <ol class="next-steps">
-          <li>Você informa seus dados e envia os documentos que tiver.</li>
-          <li>Vê a proposta, o valor e o contrato antes de decidir.</li>
-          <li>O advogado analisa e responde por escrito, com assinatura.</li>
-        </ol>
-        <button class="btn big" type="button" id="abrir-envio">Solicitar análise do meu caso</button>
-        <p class="assure">Seus dados e documentos ficam sob sigilo profissional e são tratados conforme a LGPD.</p>
+      <div class="fecho no-print">
+        <button class="btn" type="button" id="abrir-envio-2">Enviar documentos e ver a proposta <span aria-hidden="true">→</span></button>
+        <p class="acoes"><button class="btn link" type="button" id="imprimir">Imprimir o resultado</button><button class="btn link" type="button" id="refazer">Refazer o diagnóstico</button></p>
       </div>
-      <p class="next-sec no-print">
-        <button class="btn link" type="button" id="imprimir">Imprimir o resultado</button>
-        <button class="btn link" type="button" id="refazer">Refazer o diagnóstico</button>
-      </p>
     </div>
 
     <!-- Passo 1: dados e documentos (enviados por JavaScript ao serviço do escritório no Google) -->
@@ -205,7 +211,13 @@
         </div>
       </div>
       <p class="muted">Os valores são de honorários advocatícios, calculados conforme a tabela da OAB. Emolumentos de cartório, certidões e impostos (ITCMD ou ITBI) são pagos por você diretamente aos órgãos, e são estimados na consulta.</p>
-      <p><button class="btn link" type="button" id="abrir-falar">ou falar com o advogado antes de decidir</button></p>
+      <div class="humano">
+        <p><strong>Prefere falar com uma pessoa?</strong> O advogado responde em até 24 horas, em dias úteis. Seus dados já estão no protocolo; não é preciso repetir.</p>
+        <div class="btns">
+          <a class="btn ghost humano-link" href="mailto:alexandre@dickelcanova.com">Atendimento humano por e-mail</a>
+          <button class="btn link" type="button" id="abrir-falar">Outras formas de contato</button>
+        </div>
+      </div>
     </div>
 
     <!-- Passo 3: contrato e aceite -->
