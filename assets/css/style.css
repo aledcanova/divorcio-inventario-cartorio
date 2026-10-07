@@ -307,4 +307,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
 /* Selo de pagamento */
 .paybadge { display: flex; align-items: center; gap: 10px; color: var(--ink-3); font-size: .88rem; margin-top: 18px; }
 .paybadge svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.site-footer .paybadge { margin-top: 20px; }
+
+/* Selo do Mercado Pago: só na tela de pagamento, depois do aceite do contrato */
+.selo-mp { display: flex; align-items: center; gap: 14px; margin: 22px 0 0; padding: 14px 18px; border: 1px solid var(--line); border-radius: 12px; font-size: .9rem; color: var(--ink-3); max-width: 420px; }
+.selo-mp img { height: 28px; width: auto; flex: none; }
