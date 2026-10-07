@@ -437,6 +437,7 @@
   });
   $('voltar-proposta').addEventListener('click', function () { swap(pProposta, $('proposta-title')); });
   function humano() {
+    var sp = $('selo-proposta'); if (sp) sp.hidden = !CFG.mercado_pago;
     var txt = encodeURIComponent('Protocolo ' + caso.protocolo + ' - quero falar com o advogado');
     var zap = CFG.whatsapp_e164 ? 'https://wa.me/' + CFG.whatsapp_e164.replace(/\D/g, '') + '?text=' + txt : '';
     Array.prototype.forEach.call(document.querySelectorAll('.humano-link'), function (l) {

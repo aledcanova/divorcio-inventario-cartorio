@@ -341,58 +341,57 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
 .timeline strong { color: var(--ink); font-family: var(--serif); font-weight: 500; font-size: 1.08rem; }
 .mapa .timeline { margin-top: 14px; }
 
-/* ===== Identidade (07/10/2026): cabeçalho, marca, rodapé e topo da página inicial ===== */
-.wrap, .site-header .wrap { max-width: 1160px; }
+/* Proposta: oferta em destaque. Pagamento: meios lado a lado. (espelha o site de regularização) */
+.offer.destaque { padding: 38px 36px; border-radius: var(--radius); background: var(--brand); box-shadow: var(--shadow); gap: 0; }
+.offer.destaque[hidden] { display: none; }
+.offer.destaque .eyebrow { color: rgba(255,255,255,.7); margin: 0 0 12px; }
+.offer.destaque h3 { color: #fff; font-size: clamp(1.4rem, 3vw, 1.75rem); }
+.offer.destaque .price { color: #fff; font-size: clamp(2.6rem, 6vw, 3.2rem); margin: 14px 0 4px; line-height: 1.05; }
+.offer.destaque .cond { margin: 0; color: rgba(255,255,255,.76); font-size: .95rem; }
+.offer.destaque .checks { list-style: none; margin: 24px 0 28px; padding: 22px 0 0; border-top: 1px solid rgba(255,255,255,.18); display: grid; gap: 12px; color: #fff; font-size: 1rem; }
+.offer.destaque .checks li { position: relative; margin: 0; padding-left: 30px; }
+.offer.destaque .checks li::before { content: "✓"; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,.16); font-size: .78rem; line-height: 20px; text-align: center; }
+.offer.destaque .micro { margin: 14px 0 0; font-size: .92rem; color: rgba(255,255,255,.72); }
+.selo-mp { max-width: none; border: 0; padding: 0; margin: 18px 0 0; gap: 12px; font-size: .88rem; }
+.selo-mp[hidden] { display: none; }
+.selo-mp img { height: 22px; }
+.pay-title { margin-top: 36px; }
+.pay-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin: 16px 0 8px; }
+.pay { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+.pay[hidden] { display: none; }
+.pay .eyebrow { margin: 0; }
+.pay h4 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: 1.25rem; line-height: 1.25; color: var(--ink); }
+.pay p { margin: 0; color: var(--ink-3); font-size: .97rem; }
+.pay .pixcode { width: 100%; margin: 6px 0 4px; }
+.pay .btn { margin-top: auto; width: 100%; }
+.pay .selo-mp { margin-top: 6px; }
+@media (max-width: 600px) { .offer.destaque { padding: 28px 22px; } .pay { padding: 22px; } }
+
+/* Identidade e acabamento (espelha o site de regularização): cabeçalho em uma linha, marca vetorial, cantos discretos, sem animação de entrada */
+.wrap, .site-header .wrap { max-width: 1240px; }
 .site-header { background: #fff; backdrop-filter: none; }
-.site-header .wrap { min-height: 76px; gap: 32px; }
-.brand { gap: 14px; flex: none; }
-.brand-mark { width: 40px; height: 40px; border-radius: 0; background: none; display: block; }
-.brand-text { display: grid; gap: 3px; padding-left: 14px; border-left: 1px solid var(--line); }
-.brand strong { font-size: 1.14rem; letter-spacing: 0; line-height: 1.1; }
-.brand small { font-size: .68rem; letter-spacing: .22em; line-height: 1; }
-.nav { gap: 2px; }
-.nav a { position: relative; padding: 10px 11px; font-size: .9rem; color: var(--ink-2); }
-.nav a:not(.cta)::after { content: ""; position: absolute; left: 11px; right: 11px; bottom: 4px; height: 1px; background: var(--brand); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease); }
-.nav a:not(.cta):hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
-.nav a.cta { margin-left: 14px; padding: 11px 22px; }
-@media (max-width: 1180px) {
+.site-header .wrap { min-height: 72px; gap: 20px; }
+.brand { gap: 12px; flex: none; }
+.brand-mark { width: 34px; height: 34px; border-radius: 0; background: none; display: block; flex: none; }
+.brand-text { display: grid; gap: 4px; }
+.brand strong { font-size: 1.14rem; letter-spacing: 0; line-height: 1; white-space: nowrap; }
+.brand small { font-size: .66rem; letter-spacing: .2em; line-height: 1; }
+.nav { gap: 0; }
+.nav a { padding: 8px 9px; font-size: .9rem; color: var(--ink-2); white-space: nowrap; }
+.nav a:not(.cta)[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--brand); border-radius: 0; }
+.nav a.cta, .nav-toggle, .btn, .btn.cta { border-radius: 8px; }
+.nav a.cta { margin-left: 10px; padding: 11px 16px; }
+.hero .wrap > * { animation: none; }
+.btn { min-height: 50px; padding: 14px 26px; }
+.card, .verdict, .next, .offer.destaque, .pay, .fecho { border-radius: 10px; }
+@media (max-width: 1280px) {
   .nav-toggle { display: inline-block; }
-  .nav { display: none; position: absolute; left: 0; right: 0; top: 76px; background: #fff; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 8px 24px 20px; }
+  .nav { display: none; position: absolute; left: 0; right: 0; top: 72px; background: #fff; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 8px 24px 20px; }
   .nav.open { display: flex; }
   .nav a { padding: 13px 4px; border-bottom: 1px solid var(--line); border-radius: 0; }
-  .nav a:not(.cta)::after { display: none; }
-  .nav a.cta { margin: 14px 0 0; text-align: center; border-bottom: 0; border-radius: 999px; }
+  .nav a:not(.cta)[aria-current="page"] { box-shadow: none; }
+  .nav a.cta { margin: 14px 0 0; text-align: center; border-bottom: 0; border-radius: 8px; }
 }
-@media (min-width: 1181px) { .nav-toggle { display: none; } .nav { display: flex; position: static; flex-direction: row; padding: 0; border: 0; } }
-@media (max-width: 560px) {
-  .site-header .wrap { min-height: 68px; }
-  .nav { top: 68px; }
-  .brand-mark { width: 36px; height: 36px; }
-  .brand strong { white-space: nowrap; font-size: 1.02rem; }
-  .brand small { display: block; }
-  .brand-text { padding-left: 12px; }
-}
-
-/* Topo da página inicial: texto à esquerda, ficha do procedimento à direita */
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 72px; align-items: end; }
-.hero-ficha { border-top: 1px solid var(--ink); padding-top: 22px; }
-.hero-ficha .eyebrow { margin: 0 0 6px; }
-.hero-ficha dl { margin: 0; }
-.hero-ficha dl > div { padding: 14px 0; border-bottom: 1px solid var(--line); }
-.hero-ficha dt { font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; color: var(--ink-3); margin-bottom: 4px; }
-.hero-ficha dd { margin: 0; font-family: var(--serif); font-size: 1.02rem; line-height: 1.4; color: var(--ink); }
-@media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
-
-/* Rodapé escuro, com a marca */
-.site-footer { background: var(--brand); border-top: 0; color: rgba(255,255,255,.74); padding: 64px 0 36px; }
-.site-footer a { color: rgba(255,255,255,.74); text-decoration-color: rgba(255,255,255,.3); }
-.site-footer a:hover { color: #fff; }
-.site-footer strong { color: #fff; }
-.site-footer .cols { gap: 48px; grid-template-columns: 1.6fr 1fr 1fr; }
-.foot-brand { margin: 0 0 18px; color: #fff; }
-.foot-brand .brand-text { border-left-color: rgba(255,255,255,.25); }
-.foot-brand small { color: rgba(255,255,255,.7); }
-.foot-brand .brand-mark { border: 1px solid rgba(255,255,255,.3); border-radius: 9px; }
-.site-footer .cols > div > p:first-child:not(.foot-brand) strong { font-size: .72rem; text-transform: uppercase; letter-spacing: .16em; font-weight: 500; color: rgba(255,255,255,.6); }
-.legal-line { margin-top: 44px; border-top-color: rgba(255,255,255,.16); color: rgba(255,255,255,.6); }
-@media (max-width: 760px) { .site-footer .cols { grid-template-columns: 1fr; gap: 32px; } }
+@media (min-width: 1281px) { .nav-toggle { display: none; } .nav { display: flex; position: static; flex-direction: row; padding: 0; border: 0; } }
+@media (max-width: 560px) { .brand strong { font-size: 1.04rem; } .brand small { display: block; } }
+.hero h1 { max-width: 17ch; }
