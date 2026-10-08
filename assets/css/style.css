@@ -454,3 +454,4 @@ main p { max-width: 72ch; }
 .zap svg { width: 30px; height: 30px; fill: #fff; }
 @media print { .zap { display: none !important; } }
 @media (max-width: 800px) { .profile .who .retrato { max-width: 240px; } }
+.zap[hidden] { display: none; }

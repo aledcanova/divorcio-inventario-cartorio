@@ -342,7 +342,7 @@
     });
     try {   // origem da visita (anúncio), guardada só durante a visita; ver Política de Privacidade
       var og = JSON.parse(sessionStorage.getItem('origem') || '{}');
-      if (og.gclid || og.gbraid || og.wbraid) dados.gclid = og.gclid || og.gbraid || og.wbraid;
+      if (og.gclid) dados.gclid = og.gclid;   // gbraid e wbraid seguem só no campo origem
       if (Object.keys(og).length) dados.origem = JSON.stringify(og);
     } catch (e) {}
     function semAnexos(motivo) {
@@ -450,7 +450,7 @@
         set('v-formula', p.formula ? ' ' + (p.formula.indexOf('Calculado') === 0 ? p.formula : 'O valor corresponde a ' + p.formula) + ' Se a avaliação dos bens pela Fazenda estadual, ou o valor atribuído na escritura, for diferente do informado, o percentual é recalculado sobre o valor final e a diferença é acertada na última parcela.' : '');
       }
       $('k-resumo').textContent = brl(p.total) + (p.agora !== p.total ? ' (entrada de ' + brl(p.agora) + ' agora)' : '');
-      $('k-aceite').checked = false; $('k-ia').checked = false;
+      $('k-aceite').checked = false;
       swap(pContrato, $('contrato-title'));
     });
   });
@@ -501,7 +501,6 @@
     chk('k-cpf', 'e-cpf', !cpfOk($('k-cpf').value));
     chk('k-end', 'e-end', $('k-end').value.trim().length < 10);
     chk('k-aceite', 'e-aceite', !$('k-aceite').checked);
-    chk('k-ia', 'e-ia', !$('k-ia').checked);
     if (first) { first.focus(); return; }
     var p = prod(produto);
     $('k-base').value = produto === 'completo' ? valorBase : '';
@@ -602,3 +601,6 @@
   if (pre) a.tipo = pre;
   if (!retomar()) renderQuestion(nextKey());
 })();
+
+// O balão de WhatsApp não aparece nas telas do diagnóstico
+(function () { var z = document.querySelector('.zap'); if (z) z.hidden = true; })();
