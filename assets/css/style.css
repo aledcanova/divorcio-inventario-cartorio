@@ -384,7 +384,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
 .hero .wrap > * { animation: none; }
 .btn { min-height: 50px; padding: 14px 26px; }
 .card, .verdict, .next, .offer.destaque, .pay, .fecho { border-radius: 10px; }
-@media (max-width: 1330px) {
+@media (max-width: 1180px) {
   .nav-toggle { display: inline-block; }
   .nav { display: none; position: absolute; left: 0; right: 0; top: 72px; background: #fff; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 8px 24px 20px; }
   .nav.open { display: flex; }
@@ -392,7 +392,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
   .nav a:not(.cta)[aria-current="page"] { box-shadow: none; }
   .nav a.cta { margin: 14px 0 0; text-align: center; border-bottom: 0; border-radius: 8px; }
 }
-@media (min-width: 1331px) { .nav-toggle { display: none; } .nav { display: flex; position: static; flex-direction: row; padding: 0; border: 0; } }
+@media (min-width: 1181px) { .nav-toggle { display: none; } .nav { display: flex; position: static; flex-direction: row; padding: 0; border: 0; } }
 @media (max-width: 560px) { .brand strong { font-size: 1.04rem; } .brand small { display: block; } }
 .hero h1 { max-width: 22ch; }
 /* Medida de leitura: com a grade de 1240px, parágrafos soltos não passam de ~72 caracteres por linha */
@@ -422,10 +422,10 @@ main p { max-width: 72ch; }
 
 /* ===== Padronização com o site de regularização (08/10/2026): marca híbrida, quem analisa, antes de contratar, exame, WhatsApp ===== */
 .wrap { max-width: 1040px; }
-.site-header .wrap { max-width: 1330px; gap: 20px; }
-.nav a { padding: 8px 8px; font-size: .88rem; }
-.nav a.cta { margin-left: 8px; padding: 11px 15px; }
-@media (max-width: 1330px) { .nav a { padding: 13px 4px; font-size: .95rem; } .nav a.cta { margin: 14px 0 0; padding: 13px 16px; } }
+.site-header .wrap { max-width: 1200px; gap: 24px; }
+.nav a { padding: 8px 11px; font-size: .92rem; }
+.nav a.cta { margin-left: 14px; padding: 11px 18px; }
+@media (max-width: 1180px) { .nav a { padding: 13px 4px; font-size: .95rem; } .nav a.cta { margin: 14px 0 0; padding: 13px 16px; } }
 .brand-txt { display: grid; gap: 4px; }
 .brand small { display: block; font-size: .72rem; letter-spacing: .02em; text-transform: none; color: var(--ink-3); white-space: nowrap; line-height: 1; }
 @media (max-width: 480px) { .brand small { font-size: .62rem; letter-spacing: 0; } .brand small .adv { display: none; } .site-header .wrap { gap: 10px; padding: 0 16px; } .brand { gap: 9px; min-width: 0; } .brand strong { font-size: .95rem; } .nav-toggle { padding: 9px 12px; flex: none; } }
@@ -455,3 +455,8 @@ main p { max-width: 72ch; }
 @media print { .zap { display: none !important; } }
 @media (max-width: 800px) { .profile .who .retrato { max-width: 240px; } }
 .zap[hidden] { display: none; }
+/* Menu de cinco itens: em tela larga, nenhum resto das regras de menu recolhido */
+@media (min-width: 1181px) {
+  .nav a { padding: 8px 9px; border-bottom: 0; }
+  .nav a.cta { margin: 0 0 0 12px; border-radius: 8px; text-align: left; }
+}
