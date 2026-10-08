@@ -125,7 +125,7 @@
       nav.appendChild(v);
     } else nav.appendChild(el('span'));
     step.appendChild(nav);
-    if (idx === 0) step.appendChild(el('p', 'Nada do que você responder é enviado ou gravado nesta etapa. O envio só acontece no fim, se você quiser.', 'wz-priv'));
+    step.appendChild(el('p', 'O resultado desta etapa é apenas uma classificação informativa baseada nas respostas fornecidas. Ele não constitui orientação ou consulta jurídica. A análise jurídica individualizada somente ocorre após a contratação da consulta e é realizada pelo advogado responsável.', 'wz-priv'));
 
     var old = stage.firstChild;
     function enter() {
