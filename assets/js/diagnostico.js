@@ -557,11 +557,10 @@
     var usaMP = !!CFG.mercado_pago && !!CFG.endpoint && produto === 'consulta';
     $('pag-mp').hidden = true; $('pag-mp-espera').hidden = !usaMP;
     if (usaMP) {
-      temPix = false;
       fetch(CFG.endpoint, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ 'form-name': 'pagamento', protocolo: caso.protocolo, email: caso.email }) })
         .then(function (r) { return r.json(); })
         .then(function (j) { if (!j.ok || !/^https:\/\/([a-z0-9-]+\.)*mercadopago\.com(\.br)?\//.test(j.url)) throw new Error('mp'); $('mp-link').href = j.url; $('pag-mp').hidden = false; })
-        .catch(function () { var pix = !!(CFG.pix_chave && CFG.pix_nome); $('pag-pix').hidden = !pix; $('pag-email').hidden = pix; })
+        .catch(function () { $('pag-email').hidden = temPix; })
         .then(function () { $('pag-mp-espera').hidden = true; });
     }
     $('pag-pix').hidden = !temPix;

@@ -465,3 +465,9 @@ main p { max-width: 72ch; }
 .caso { margin: 8px 0 0; }
 .caso h3 { margin: 26px 0 6px; font-size: 1.12rem; }
 .caso p { margin: 0; color: var(--ink-2); }
+
+/* Pagamento: caixas empilhadas em largura total (Mercado Pago em cima, Pix embaixo) */
+.pay-grid { grid-template-columns: 1fr; }
+.pay .selo-mp { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.pay .selo-mp img { height: 24px; width: auto; }
+.pay .pixcode { min-height: 0; }
