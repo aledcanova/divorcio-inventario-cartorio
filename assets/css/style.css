@@ -402,3 +402,15 @@ main p { max-width: 72ch; }
 /* Páginas de texto (.wrap.prose): a coluna de leitura fica alinhada à esquerda da grade, com ~76 caracteres */
 .wrap.prose > * { max-width: 76ch; }
 .wrap.prose > .btns, .wrap.prose > .grid, .wrap.prose > .steps.cols { max-width: none; }
+
+/* Canais de contato com ícone (espelha o site de regularização) */
+.canais { list-style: none; padding: 0; margin: 40px 0 0; border-top: 1px solid var(--ink); }
+.canais a { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 18px; min-height: 84px; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); transition: padding .3s var(--ease); }
+.canais a:hover { padding-left: 4px; }
+.canais svg { width: 22px; height: 22px; fill: var(--brand); justify-self: center; }
+.canais .ic { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; }
+.canais strong { display: block; font-family: var(--serif); font-weight: 500; font-size: 1.15rem; }
+.canais small { color: var(--ink-3); font-size: .92rem; }
+.canais .ir { color: var(--ink-3); font-size: .9rem; }
+.canais + .muted { margin-top: 28px; }
+@media (prefers-reduced-motion: reduce) { .canais a { transition: none; } }
