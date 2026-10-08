@@ -414,3 +414,8 @@ main p { max-width: 72ch; }
 .canais .ir { color: var(--ink-3); font-size: .9rem; }
 .canais + .muted { margin-top: 28px; }
 @media (prefers-reduced-motion: reduce) { .canais a { transition: none; } }
+
+/* Quem somos: retrato do responsável técnico acima do nome */
+.profile .who { border-top: 0; padding-top: 0; }
+.profile .retrato { display: block; width: 100%; max-width: 340px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; margin-bottom: 22px; }
+@media (max-width: 800px) { .profile .retrato { max-width: 260px; } }
