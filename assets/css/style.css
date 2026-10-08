@@ -394,7 +394,6 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
 }
 @media (min-width: 1181px) { .nav-toggle { display: none; } .nav { display: flex; position: static; flex-direction: row; padding: 0; border: 0; } }
 @media (max-width: 560px) { .brand strong { font-size: 1.04rem; } .brand small { display: block; } }
-.hero h1 { max-width: 22ch; }
 /* Medida de leitura: com a grade de 1240px, parágrafos soltos não passam de ~72 caracteres por linha */
 main p { max-width: 72ch; }
 .final p, .note p, .card p, .legal-line, .wizard p, .hp { max-width: none; }

@@ -101,7 +101,7 @@
     var q = Q[k], vis = visible(), idx = vis.indexOf(k);
     bar.value = Math.round((idx / vis.length) * 100);
     var secs = ['O caso', 'O acordo', 'A família', 'Os bens', 'Situação atual'];
-    count.textContent = 'Etapa ' + (secs.indexOf(q.s) + 1) + ' de ' + secs.length;
+    count.textContent = 'Etapa ' + (secs.indexOf(q.s) + 1) + ' de ' + secs.length + (secs.indexOf(q.s) === secs.length - 1 ? ' · últimas perguntas' : '');
 
     var step = el('div', null, 'wz-step');
     step.appendChild(el('p', q.s, 'wz-section'));
