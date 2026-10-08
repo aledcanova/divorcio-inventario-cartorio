@@ -460,3 +460,9 @@ main p { max-width: 72ch; }
   .nav a { padding: 8px 9px; border-bottom: 0; }
   .nav a.cta { margin: 0 0 0 12px; border-radius: 8px; text-align: left; }
 }
+/* Balão de WhatsApp menor no celular; folga no fim do rodapé para ele não cobrir o texto */
+@media (max-width: 600px) { .zap { width: 48px; height: 48px; right: 14px; bottom: 14px; } .zap svg { width: 26px; height: 26px; } }
+.site-footer { padding-bottom: 84px; }
+.caso { margin: 8px 0 0; }
+.caso h3 { margin: 26px 0 6px; font-size: 1.12rem; }
+.caso p { margin: 0; color: var(--ink-2); }

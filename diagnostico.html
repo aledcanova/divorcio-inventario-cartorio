@@ -16,6 +16,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/icone-32.png?v=3">
 <link rel="apple-touch-icon" href="assets/img/icone-180.png?v=3">
 <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
@@ -107,13 +108,14 @@
         </div>
         <div class="field">
           <label for="f-email">E-mail</label>
-          <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" required aria-describedby="e-email">
-          <p class="err" id="e-email" hidden>Informe um e-mail válido. É por ele que você recebe o contrato e a orientação.</p>
+          <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" aria-describedby="e-email h-contato">
+          <p class="err" id="e-email" hidden>Informe um e-mail válido ou um WhatsApp com DDD.</p>
         </div>
         <div class="field">
-          <label for="f-tel">Telefone com WhatsApp <span class="opt">(opcional)</span></label>
-          <input type="tel" id="f-tel" name="telefone" autocomplete="tel" inputmode="tel" aria-describedby="h-tel">
-          <p class="hint" id="h-tel">Se você informar, o acompanhamento do seu pedido também é feito por mensagem.</p>
+          <label for="f-tel">WhatsApp ou telefone, com DDD</label>
+          <input type="tel" id="f-tel" name="telefone" autocomplete="tel" inputmode="tel" aria-describedby="h-contato e-tel">
+          <p class="hint" id="h-contato">Basta um dos dois: e-mail ou WhatsApp.</p>
+          <p class="err" id="e-tel" hidden>Informe o número com DDD.</p>
         </div>
         <div class="row2">
           <div class="field">
@@ -275,6 +277,12 @@
         <input type="hidden" name="email" id="k-email">
         <input type="hidden" name="aceito_em" id="k-quando">
         <p class="hp" aria-hidden="true"><label>Não preencha este campo <input name="site" tabindex="-1" autocomplete="off"></label></p>
+        <div class="field" id="k-sem-email" hidden>
+          <label for="k-email-n">E-mail</label>
+          <input type="email" id="k-email-n" autocomplete="email" inputmode="email" aria-describedby="h-kemail e-kemail-n">
+          <p class="hint" id="h-kemail">É por ele que você recebe a cópia do contrato e a orientação.</p>
+          <p class="err" id="e-kemail-n" hidden>Informe um e-mail válido.</p>
+        </div>
         <div id="k-retomada" hidden>
           <div class="field">
             <label for="k-nome-v">Nome completo</label>

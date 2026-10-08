@@ -290,7 +290,11 @@
     var first = null;
     function chk(id, errId, bad, msg) { if (setErr($(id), errId, bad, msg) && !first) first = $(id); }
     chk('f-nome', 'e-nome', $('f-nome').value.trim().split(/\s+/).length < 2);
-    chk('f-email', 'e-email', !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('f-email').value.trim()));
+    var em = $('f-email').value.trim(), tel = $('f-tel').value.replace(/\D/g, '');
+    var emOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em), telOk = tel.length >= 10;
+    // basta um dos dois, e-mail ou WhatsApp, quando o serviço de formulários já aceita envio sem e-mail (email_opcional)
+    chk('f-email', 'e-email', em ? !emOk : !(CFG.email_opcional && telOk));
+    chk('f-tel', 'e-tel', tel.length > 0 && !telOk);
     chk('f-cidade', 'e-cidade', $('f-cidade').value.trim().length < 2);
     chk('f-uf', 'e-uf', !$('f-uf').value);
     var total = 0, tipoRuim = false;
@@ -449,6 +453,7 @@
         set('v-abat', p.abat ? ' Da entrada são abatidos ' + brl(p.abat) + ' já pagos na consulta de viabilidade do mesmo protocolo, restando ' + brl(p.agora) + ' a pagar no aceite.' : ''); set('v-parcela', brl(p.parcela));
         set('v-formula', p.formula ? ' ' + (p.formula.indexOf('Calculado') === 0 ? p.formula : 'O valor corresponde a ' + p.formula) + ' Se a avaliação dos bens pela Fazenda estadual, ou o valor atribuído na escritura, for diferente do informado, o percentual é recalculado sobre o valor final e a diferença é acertada na última parcela.' : '');
       }
+      $('k-sem-email').hidden = retomada || !!caso.email;
       $('k-resumo').textContent = brl(p.total) + (p.agora !== p.total ? ' (entrada de ' + brl(p.agora) + ' agora)' : '');
       $('k-aceite').checked = false;
       swap(pContrato, $('contrato-title'));
@@ -497,6 +502,11 @@
       chk('k-nome-v', 'e-knome', $('k-nome-v').value.trim().split(/\s+/).length < 2);
       chk('k-email-v', 'e-kemail', !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('k-email-v').value.trim()));
       caso.nome = $('k-nome-v').value.trim(); caso.email = $('k-email-v').value.trim();
+    }
+    if (!retomada && !caso.email) {
+      var en = $('k-email-n').value.trim();
+      chk('k-email-n', 'e-kemail-n', !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(en));
+      if (!first) caso.email = en;
     }
     chk('k-cpf', 'e-cpf', !cpfOk($('k-cpf').value));
     chk('k-end', 'e-end', $('k-end').value.trim().length < 10);
@@ -604,3 +614,6 @@
 
 // O balão de WhatsApp não aparece nas telas do diagnóstico
 (function () { var z = document.querySelector('.zap'); if (z) z.hidden = true; })();
+
+// Enquanto o serviço de formulários exigir e-mail, o formulário não oferece a opção de informar só o WhatsApp
+(function () { if (!(window.SITE_CONFIG || {}).email_opcional) { var h = document.getElementById('h-contato'); if (h) h.textContent = 'O e-mail é necessário; o WhatsApp é opcional.'; } })();
