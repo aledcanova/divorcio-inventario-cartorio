@@ -2,13 +2,12 @@
 (function () {
   'use strict';
 
-  function div(a) { return a.tipo === 'divorcio' || a.tipo === 'uniao'; }
+  function div(a) { return a.tipo === 'divorcio'; }
   function inv(a) { return a.tipo === 'inventario'; }
   var SN = [['nao', 'Não'], ['sim', 'Sim']];
   var Q = {
     tipo: { s: 'O caso', h: 'Escolha a opção mais próxima da sua situação.', t: 'O que você precisa resolver?', o: [
       ['divorcio', 'Divórcio (casamento civil)'],
-      ['uniao', 'Dissolução de união estável'],
       ['inventario', 'Inventário (bens de quem faleceu)'] ] },
     acordo: { s: 'O acordo', w: div, h: 'A escritura em cartório exige que os dois concordem.', t: 'Vocês dois estão de acordo com a separação?', o: [
       ['sim', 'Sim, estamos de acordo'], ['nao', 'Não, há discordância'] ] },
@@ -160,7 +159,7 @@
 
   // Classificação por regras fixas (CPC arts. 610 e 733; Res. CNJ 35/2007 com a Res. 571/2024). Devolve {pill, cod, titulo, texto, atencao[], docs[], etapas[]}
   function classify(a) {
-    var at = [], uniao = a.tipo === 'uniao', nome = uniao ? 'a dissolução da união estável' : 'o divórcio', fo = uniao ? 'feita' : 'feito';
+    var at = [], nome = 'o divórcio', fo = 'feito';
     var ETAPAS = ['Análise dos documentos por advogado', 'Declaração do imposto, quando devido', 'Minuta da escritura, revisada com as partes', 'Conferência pelo tabelionato competente', 'Assinatura presencial ou por videoconferência, com o advogado', 'Averbações e registros'];
     if (a.proc === 'sim') at.push('Há processo judicial em andamento. As partes podem pedir a suspensão ou desistir dele para seguir no cartório; é preciso examinar em que fase está.');
     if (a.proc === 'ns') at.push('Confirmar se existe processo judicial sobre o mesmo assunto.');
@@ -168,7 +167,7 @@
     if (a.exterior === 'sim') at.push('Bens situados fora do Brasil não entram na escritura brasileira: seguem as regras do país onde estão.');
 
     if (div(a)) {
-      var DOCS = [uniao ? 'Escritura ou sentença que reconheceu a união estável, se houver' : 'Certidão de casamento atualizada', 'Documento de identidade e CPF dos dois', 'Pacto antenupcial ou contrato de convivência, se houver'];
+      var DOCS = ['Certidão de casamento atualizada', 'Documento de identidade e CPF dos dois', 'Pacto antenupcial, se houver'];
       if (a.acordo === 'nao' || a.dpartilha === 'nao') {
         return { pill: 'bad', cod: 'DIV_JUDICIAL', titulo: 'Sem acordo, o caminho é o judicial',
           texto: 'A escritura em cartório exige consenso sobre a separação e, se a partilha for feita agora, sobre a divisão dos bens. Enquanto houver discordância, ' + nome + ' depende de processo judicial. Construído o acordo, a via do cartório volta a ser possível.',
@@ -434,8 +433,8 @@
     return { nome: NOMES[c], total: total, agora: r2(Math.max(0, entrada - abat)), entrada: entrada, abat: abat, parcela: parcela, formula: formula, link: CFG.link_cartao_completo, cod: c };
   }
   var OBJETO = {
-    DIV_SEM_BENS: 'escritura pública de divórcio consensual ou de dissolução de união estável, sem partilha de bens',
-    DIV_COM_BENS: 'escritura pública de divórcio consensual ou de dissolução de união estável, com partilha de bens',
+    DIV_SEM_BENS: 'escritura pública de divórcio consensual, sem partilha de bens',
+    DIV_COM_BENS: 'escritura pública de divórcio consensual, com partilha de bens',
     INV: 'escritura pública de inventário e partilha', INV_PENDENCIAS: 'escritura pública de inventário e partilha', INV_NEGATIVO: 'escritura pública de inventário negativo'
   };
   var produto = null;
@@ -606,7 +605,7 @@
     swap(pProposta, $('proposta-title'));
     return true;
   }
-  var pre = (location.search.match(/[?&]tipo=(divorcio|uniao|inventario)/) || [])[1];
+  var pre = (location.search.match(/[?&]tipo=(divorcio|inventario)/) || [])[1];
   if (pre) a.tipo = pre;
   if (!retomar()) renderQuestion(nextKey());
 })();
