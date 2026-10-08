@@ -12,9 +12,9 @@
 <meta name="theme-color" content="#ffffff">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="no-referrer">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/img/icone-32.png">
-<link rel="icon" type="image/svg+xml" href="assets/img/icone.svg">
-<link rel="apple-touch-icon" href="assets/img/icone-180.png">
+<link rel="icon" type="image/svg+xml" href="assets/img/icone.svg?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/icone-32.png?v=3">
+<link rel="apple-touch-icon" href="assets/img/icone-180.png?v=3">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -22,8 +22,8 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Divórcio e Inventário em Cartório, página inicial">
-      <img class="brand-mark" src="assets/img/icone.svg" alt="" width="34" height="34">
-      <span class="brand-text"><strong>Divórcio e Inventário</strong><small>em cartório</small></span>
+      <svg class="brand-mark" aria-hidden="true" viewBox="0 0 32 32" width="34" height="34"><rect width="32" height="32" rx="7" fill="#0f2a43"/><path d="M16 5.5 22.5 14 16 27 9.5 14Z" fill="#fff"/><path d="M16 15.5V27" stroke="#0f2a43" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="14" r="1.9" fill="#0f2a43"/></svg>
+      <span class="brand-txt"><strong>Divórcio e Inventário em Cartório</strong><small>Alexandre Dickel Canova · <span class="adv">Advogado · </span>OAB/RS 127.163</small></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Principal">
@@ -31,7 +31,7 @@
       <a href="como-funciona.html">Como funciona</a>
       <a href="perguntas.html">Perguntas frequentes</a>
       <a href="itcmd.html">Calculadora ITCMD</a>
-      <a href="quem-somos.html">Quem somos</a>
+      <a href="quem-somos.html">Quem atende</a>
       <a href="contato.html">Contato</a>
       <a class="cta" href="diagnostico.html">Avaliar meu caso</a>
     </nav>
@@ -43,6 +43,7 @@
   <div class="wrap prose">
     <p class="eyebrow">Inventário</p>
     <h1>Inventário: prazo, multa e imposto.</h1>
+    <p class="autoria">Por Alexandre Dickel Canova, OAB/RS 127.163 · Atualizado em 08/10/2026</p>
     <p class="lead">O atraso não impede a escritura. O que pode acontecer é multa sobre o imposto, conforme o estado.</p>
   </div>
 </section>
@@ -74,7 +75,7 @@
         <p><strong>Conteúdo</strong></p>
         <ul>
           <li><a href="procedimento.html">Sobre o procedimento</a></li>
-          <li><a href="quem-somos.html">Quem somos</a></li>
+          <li><a href="quem-somos.html">Quem atende</a></li>
           <li><a href="como-funciona.html">Como funciona</a></li>
           <li><a href="itcmd.html">Estimativa de ITCMD</a></li>
           <li><a href="perguntas.html">Perguntas frequentes</a></li>
@@ -91,10 +92,11 @@
         </ul>
       </div>
     </div>
-    <p class="legal-line">Responsável técnico: Alexandre Dickel Canova, advogado, OAB/RS 127.163, Porto Alegre/RS. Conteúdo de caráter exclusivamente informativo, nos termos do Provimento nº 205/2021 do Conselho Federal da OAB. Não constitui consulta jurídica nem promessa de resultado. Este site não usa cookies nem rastreadores. Atualizado em 2026-10-07.</p>
+    <p class="legal-line">Advogado responsável: Alexandre Dickel Canova, advogado, OAB/RS 127.163, Porto Alegre/RS. Conteúdo de caráter exclusivamente informativo, nos termos do Provimento nº 205/2021 do Conselho Federal da OAB. Não constitui consulta jurídica nem promessa de resultado. Este site não usa cookies nem scripts de terceiros. Atualizado em 08/10/2026.</p>
   </div>
 </footer>
 <script src="assets/js/site.js" defer></script>
 
+<a class="zap" href="https://wa.me/5555936186722" target="_blank" rel="noopener" aria-label="Falar com o advogado pelo WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.25l-.3-.18-3 .77.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.6 7.4c-.2-.45-.4-.46-.6-.47h-.5c-.17 0-.45.07-.69.33-.24.26-.9.88-.9 2.15s.92 2.5 1.05 2.67c.13.17 1.8 2.86 4.44 3.9 2.2.86 2.64.69 3.12.65.48-.04 1.54-.63 1.76-1.24.22-.6.22-1.13.15-1.24-.06-.1-.24-.17-.5-.3-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.59.13-.17.26-.67.85-.82 1.02-.15.17-.3.2-.56.07-.26-.13-1.1-.4-2.1-1.3-.77-.69-1.3-1.54-1.45-1.8-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.46.13-.15.17-.26.26-.43.09-.17.04-.33-.02-.46-.07-.13-.57-1.43-.8-1.94z"/></svg></a>
 </body>
 </html>

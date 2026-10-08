@@ -302,7 +302,6 @@
     if (setErr(null, 'e-arq', tipoRuim || total > MAX, arqMsg) && !first) first = $('f-certidao');
     if (result && COM_VALOR[result.cod]) chk('f-valor', 'e-valor', !$('f-valor-ns').checked && !(num($('f-valor').value) > 0));
     chk('f-c1', 'e-c1', !$('f-c1').checked);
-    chk('f-c2', 'e-c2', !$('f-c2').checked);
     return first;
   }
   function protocolo() {
@@ -325,28 +324,43 @@
       fr.onerror = no; fr.readAsDataURL(f);
     });
   }
+  // Envio ao serviço do escritório. Se o envio com anexos falhar, manda só os dados e pede os documentos por e-mail.
+  var anexosPendentes = false;
+  function mandar(dados) {
+    if (!CFG.endpoint) return Promise.reject({ codigo: 'sem-endpoint' });
+    return fetch(CFG.endpoint, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(dados) })
+      .then(function (r) { if (!r.ok) throw { codigo: 'http-' + r.status }; return r.json(); })
+      .then(function (j) { if (!j || !j.ok) throw { codigo: (j && j.erro) || 'recusado' }; });
+  }
   function post(fd, btn, rotulo, errBox, ok) {
     errBox.hidden = true;
     btn.disabled = true; btn.textContent = 'Enviando…';
-    var dados = {}, arquivos = [];
+    var dados = {}, arquivos = [], nomes = [];
     fd.forEach(function (v, k) {
-      if (typeof v === 'object' && v && 'size' in v) { if (v.size) arquivos.push(lerArquivo(k, v)); }
+      if (typeof v === 'object' && v && 'size' in v) { if (v.size) { arquivos.push(lerArquivo(k, v)); nomes.push(v.name); } }
       else dados[k] = v;
     });
-    Promise.all(arquivos).then(function (lista) {
-      dados._arquivos = lista;
-      if (!CFG.endpoint) throw new Error('sem endpoint');
-      return fetch(CFG.endpoint, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(dados) });
-    }).then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    }).then(function (j) {
-      if (!j || !j.ok) throw new Error('recusado');
-      ok();
-    }).catch(function () {
-      errBox.textContent = 'Não foi possível enviar agora. Verifique a conexão e tente de novo. Se o problema continuar, escreva para ' + (CFG.email || 'o e-mail da página de contato') + '.';
-      errBox.hidden = false;
-    }).then(function () { btn.disabled = false; btn.textContent = rotulo; });
+    try {   // origem da visita (anúncio), guardada só durante a visita; ver Política de Privacidade
+      var og = JSON.parse(sessionStorage.getItem('origem') || '{}');
+      if (og.gclid || og.gbraid || og.wbraid) dados.gclid = og.gclid || og.gbraid || og.wbraid;
+      if (Object.keys(og).length) dados.origem = JSON.stringify(og);
+    } catch (e) {}
+    function semAnexos(motivo) {
+      if (!nomes.length || (motivo && motivo.codigo === 'dados')) throw motivo;
+      if (window.console) console.error('envio com anexos falhou:', motivo && (motivo.codigo || motivo.message));
+      var d2 = {}; Object.keys(dados).forEach(function (k) { if (k !== '_arquivos') d2[k] = dados[k]; });
+      d2.anexos_pendentes = nomes.join('; ');
+      return mandar(d2).then(function () { anexosPendentes = true; });
+    }
+    Promise.all(arquivos).then(function (lista) { dados._arquivos = lista; return mandar(dados); })
+      .catch(semAnexos)
+      .then(function () { ok(); })
+      .catch(function (e) {
+        var cod = (e && (e.codigo || e.message)) || 'rede';
+        if (window.console) console.error('envio falhou:', cod);
+        errBox.textContent = 'Não foi possível enviar agora. Verifique a conexão e tente de novo. Se o problema continuar, escreva para ' + (CFG.email || 'o e-mail da página de contato') + '. (código: ' + String(cod).slice(0, 40) + ')';
+        errBox.hidden = false;
+      }).then(function () { btn.disabled = false; btn.textContent = rotulo; });
   }
 
   form.addEventListener('submit', function (ev) {
@@ -382,6 +396,11 @@
         $('pc-detalhe').textContent = 'Entrada de ' + brl(p.entrada) + (p.abat ? ' (' + brl(p.abat) + ' já pagos na consulta; ' + brl(p.agora) + ' agora)' : ' agora') + ' e duas parcelas de ' + brl(p.parcela) + ': uma no envio da minuta ao tabelionato e outra na assinatura da escritura.' + (p.formula ? ' ' + p.formula : '');
       } else {
         $('nota-so-consulta').textContent = 'O atendimento começa pela consulta de viabilidade: o advogado analisa os documentos, assina a orientação e envia a proposta para a condução do caso.';
+      }
+      if (anexosPendentes && !$('aviso-anexos')) {
+        var av = el('p', 'Seus dados foram recebidos, mas não foi possível receber os arquivos agora. Envie-os para ' + CFG.email + ' informando o protocolo ' + prot + '.', 'err');
+        av.id = 'aviso-anexos'; av.setAttribute('role', 'status');
+        $('offer-consulta').parentNode.parentNode.insertBefore(av, $('offer-consulta').parentNode);
       }
       humano();
       swap(pProposta, $('proposta-title'));
@@ -431,7 +450,7 @@
         set('v-formula', p.formula ? ' ' + (p.formula.indexOf('Calculado') === 0 ? p.formula : 'O valor corresponde a ' + p.formula) + ' Se a avaliação dos bens pela Fazenda estadual, ou o valor atribuído na escritura, for diferente do informado, o percentual é recalculado sobre o valor final e a diferença é acertada na última parcela.' : '');
       }
       $('k-resumo').textContent = brl(p.total) + (p.agora !== p.total ? ' (entrada de ' + brl(p.agora) + ' agora)' : '');
-      $('k-aceite').checked = false;
+      $('k-aceite').checked = false; $('k-ia').checked = false;
       swap(pContrato, $('contrato-title'));
     });
   });
@@ -482,6 +501,7 @@
     chk('k-cpf', 'e-cpf', !cpfOk($('k-cpf').value));
     chk('k-end', 'e-end', $('k-end').value.trim().length < 10);
     chk('k-aceite', 'e-aceite', !$('k-aceite').checked);
+    chk('k-ia', 'e-ia', !$('k-ia').checked);
     if (first) { first.focus(); return; }
     var p = prod(produto);
     $('k-base').value = produto === 'completo' ? valorBase : '';
